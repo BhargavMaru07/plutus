@@ -17,7 +17,7 @@ function Stratergy() {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setData({ ...formData })
-
+        
     }
 
     return (
