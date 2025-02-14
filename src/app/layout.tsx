@@ -27,20 +27,16 @@ export default function RootLayout({
     <ClerkProvider>
       <APIDataProvider>
         <html lang="en">
-          <body className={`${ubuntu.className}`}>
+          <body className={`${ubuntu.className} min-h-screen flex flex-col`}>
             <GoogleAnalytics />
             <Analytics />
-            <div className="grid md:grid-cols-[20vw_auto] grid-cols-1  md:gap-2 bg-white dark:bg-black md:p-1 p-0">
-              <div>
-                <Sidebar />
-              </div>
+            <div className="h-screen grid md:grid-cols-[16vw_auto] grid-cols-1  md:gap-2 bg-white dark:bg-black md:p-0 p-0">
+                <Sidebar  />
               <div>
                 {children}
               </div>
             </div>
-            <footer>
-              <Footer />
-            </footer>
+
           </body>
         </html>
       </APIDataProvider>
