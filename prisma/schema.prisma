@@ -30,10 +30,10 @@ model User {
 
 model Strategy{
   id             String   @id @default(uuid())
-  duration       Decimal
-  maxProfit      Float
-  maxLoss        Float
-  totalAmount    Float
+  duration       String
+  maxProfit      Int
+  maxLoss        Int
+  totalAmount    Int
   userId         String   @unique
   user           User     @relation(fields: [userId],references: [id],onDelete: Cascade)
 }

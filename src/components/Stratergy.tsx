@@ -2,9 +2,13 @@ import React, { FormEvent } from 'react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu'
 import { Button } from './ui/button'
 import { RotateCcw } from 'lucide-react'
+import { useUser } from '@clerk/nextjs'
 
 
 function Stratergy() {
+
+    const {user} = useUser();
+
     const [data, setData] = React.useState({
         duration: "Select Duration",
         maxProfit: 0,
@@ -14,11 +18,47 @@ function Stratergy() {
 
     const [formData, setFormData] = React.useState({ ...data });
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setData({ ...formData })
-        
-    }
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      setData({ ...formData });
+
+      if (!user) {
+        console.error("User not authenticated");
+        return;
+      }
+      
+      const payload = {
+        duration: formData.duration,
+        maxProfit: formData.maxProfit,
+        maxLoss: formData.maxLoss,
+        totalAmount: formData.totalAmount,
+        userId: user.id, // Make sure user.id exists
+      };
+
+      console.log("Sending request with payload:", payload);
+
+      try {
+        const response = await fetch("/api/strategy/create", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          console.log("Strategy created:", result);
+          setData({ ...formData });
+        } else {
+          console.error("Error:", result.message);
+        }
+      } catch (error) {
+        console.error("Failed to create strategy:", error);
+      }
+    };
+
 
     return (
         <div className="w-full bg-white dark:bg-theme_gray_2F2F2F-dark rounded-lg flex flex-col gap-4 px-5 py-4">
@@ -117,3 +157,8 @@ function Stratergy() {
 
 
 export default Stratergy
+
+
+
+
+

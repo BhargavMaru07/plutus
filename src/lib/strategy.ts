@@ -1,8 +1,17 @@
 import { prisma } from "./prisma";
 
+interface StrategyData {
+  duration: string;
+  maxProfit: number;
+  maxLoss: number;
+  totalAmount: number;
+  userId: string;
+}
+
+
 
 interface StrategyData {
-  duration: number;
+  duration: string;
   maxProfit: number;
   maxLoss: number;
   totalAmount: number;
@@ -11,23 +20,30 @@ interface StrategyData {
 
 export const createStrategy = async (data: StrategyData) => {
   try {
-    // Check if user exists
+    console.log("Received data:", data);
+
+    // Ensure all fields are present before inserting
+    if (!data.userId || !data.duration || data.maxProfit == null || data.maxLoss == null || data.totalAmount == null) {
+      throw new Error("Invalid strategy data provided");
+    }
+
     const user = await prisma.user.findUnique({
-      where: { id: data.userId },
+      where: { clerkId: data.userId },
     });
 
     if (!user) {
       throw new Error("User not found");
     }
 
-    // Create a new strategy 
+    console.log("Creating strategy with:", data);
+
     const strategy = await prisma.strategy.create({
       data: {
         duration: data.duration,
         maxProfit: data.maxProfit,
         maxLoss: data.maxLoss,
         totalAmount: data.totalAmount,
-        userId: data.userId, // Link strategy to user
+        userId: user.id, // Make sure it matches the database schema
       },
     });
 
@@ -38,10 +54,9 @@ export const createStrategy = async (data: StrategyData) => {
   }
 };
 
-
 interface UpdateStrategyData {
   id: string;
-  duration?: number;
+  duration?: string;
   maxProfit?: number;
   maxLoss?: number;
   totalAmount?: number;
@@ -78,3 +93,4 @@ export const deleteStrategy = async (id: string) => {
     throw new Error("Failed to delete strategy");
   }
 };
+

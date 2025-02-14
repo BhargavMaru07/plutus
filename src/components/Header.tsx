@@ -1,30 +1,52 @@
 "use client";
 
-import React from 'react'
-import SearchBox from './SearchBox'
-import IconContainer from './IconContainer'
-import { Bell } from 'lucide-react'
-import { Button } from './ui/button'
-import { useRouter } from 'next/navigation'
+import React from "react";
+import SearchBox from "./SearchBox";
+import IconContainer from "./IconContainer";
+import { Bell } from "lucide-react";
+import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
-function Header({Title}:{Title:string}) {
+function Header({ Title }: { Title: string }) {
   const router = useRouter();
   return (
     <div>
-        <div className="bg-theme_black-light dark:bg-theme_black-dark md:rounded-t-2xl rounded-none max-h-[11vh] md:w-[25vw] w-full p-3">
-                <h1 className="text-3xl text-black dark:text-white font-bold text-center mb-8">
-                  {Title}
-                </h1>
-              </div>
-              <div className='absolute top-0 left-[25vw] h-[11vh] w-[52vw] bg-theme_black-light dark:bg-theme_black-dark'>
-                <div className='w-full h-full flex justify-end gap-5 items-center bg-white dark:bg-black rounded-bl-2xl'>  
-                  <SearchBox></SearchBox>
-                  <IconContainer><Bell /></IconContainer>
-                  <Button onClick={() => {router.push("/")}} variant={'theme_red'}>Connect</Button>
-                </div>
-              </div>
-    </div>    
-)
+      <div className="max-h-[11vh] w-full rounded-none bg-theme_black-light p-3 dark:bg-theme_black-dark md:w-[25vw] md:rounded-t-2xl">
+        <h1 className="mb-8 text-center text-3xl font-bold text-black dark:text-white">{Title}</h1>
+      </div>
+      <div className="absolute left-[25vw] top-0 h-[11vh] w-[52vw] bg-theme_black-light dark:bg-theme_black-dark">
+        <div className="flex h-full w-full items-center justify-end gap-5 rounded-bl-2xl bg-white dark:bg-black">
+          <SignedOut>
+            <SignInButton >
+              <Button variant="outline">Login</Button>
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: "w-10 h-10",
+                },
+              }}
+            />
+          </SignedIn>
+          <SearchBox></SearchBox>
+          <IconContainer>
+            <Bell />
+          </IconContainer>
+          <Button
+            onClick={() => {
+              router.push("/");
+            }}
+            variant={"theme_red"}
+          >
+            Connect
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default Header
+export default Header;
