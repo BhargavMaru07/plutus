@@ -9,6 +9,8 @@ import Footer from "@/components/Footer";
 import { APIDataProvider } from "@/hooks/UseApi";
 import { ClerkProvider } from "@clerk/nextjs";
 import Sidebar from "@/components/Sidebar";
+import UserSync from "@/components/UserSync";
+import ClientWrapper from "@/components/ClientWrapper";
 
 const ubuntu = Ubuntu({
   weight: ["400", "500", "700"],
@@ -27,14 +29,14 @@ export default function RootLayout({
     <ClerkProvider>
       <APIDataProvider>
         <html lang="en">
-          <body className={`${ubuntu.className} min-h-screen flex flex-col`}>
-            <GoogleAnalytics />
-            <Analytics />
-            <div className="h-screen grid md:grid-cols-[16vw_auto] grid-cols-1  md:gap-2 bg-white dark:bg-black md:p-0 p-0">
-                <Sidebar  />
+          <body className={`${ubuntu.className}`}>
+            <UserSync /> {/* ✅ Runs on the server but does not render anything */}
+            <ClientWrapper /> {/* ✅ Client components like analytics */}
+            <div className="grid grid-cols-1 bg-white p-0 dark:bg-black md:grid-cols-[20vw_auto] md:gap-2 md:p-1">
               <div>
-                {children}
+                <Sidebar />
               </div>
+              <div>{children}</div>
             </div>
 
           </body>
