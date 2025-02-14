@@ -7,8 +7,7 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 
 export default function Navbar({ toggleDarkMode, isDarkMode }: { toggleDarkMode: () => void; isDarkMode?: boolean }) {
-  const [isOpen, setIsOpen] = useState(false);
-
+  
   return (
     <div className="relative flex items-center justify-between bg-theme_black-light p-5 text-black dark:bg-theme_black-dark dark:text-white">
       <div className="bg-theme_red-light bg-clip-text p-2 dark:bg-theme_red-dark">

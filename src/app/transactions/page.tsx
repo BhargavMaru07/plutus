@@ -60,8 +60,8 @@ function page() {
                 </div>
                 <hr className='w-full border-1 border-white mb-5 mt-1' />
                 <div className='flex flex-col gap-2'>
-                {data.map((item) => (
-                    <TransactionCard status={item.status} />
+                {data.map((item, idx) => (
+                    <TransactionCard key={idx} status={item.status} />
                 ))}
                 </div>
             </Container>

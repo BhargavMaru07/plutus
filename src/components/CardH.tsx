@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MoveUp, MoveDown } from "lucide-react";
+import Image from "next/image";
 
 
 interface Coin {
@@ -25,12 +26,14 @@ export default function CardH({ coin, classname }: CardHProps) {
                 <div className="flex items-center gap-4 justify-between px-4 py-5 text-lg">
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent bg-[length:200%_100%] animate-[shimmer_3s_infinite]"></div>
                     <div className="flex gap-2 items-center w-1/5 font-semibold">
-                        <img
+                        {/* <img
                             src={coin.image}
                             alt={coin.name}
                             width={30}
                             height={30} 
-                        />
+                        /> */}
+
+                        <Image src={coin.image} alt={coin.name} width={32} height={32} />
                         <h2 className="text-xlfont-semibold">
                             {coin.name} - {coin.symbol}
                         </h2>

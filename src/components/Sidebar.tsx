@@ -6,8 +6,8 @@ import { SunMoon, Home, LayoutDashboard, Coins, ChartLine, ArrowLeftRight } from
 import useDarkMode from "@/hooks/useDarkMode";
 
 export default function Sidebar() {
-      const {isDarkMode, toggleDarkMode} = useDarkMode();
-    const [isClicked, setIsClicked] = useState(false);
+    const { isDarkMode, toggleDarkMode } = useDarkMode();
+
     return (
         <div className="bg-theme_black-light dark:bg-theme_black-dark text-black dark:text-white h-20 md:h-screen flex justify-between items-center md:flex-col md:justify-start md:rounded-2xl p-3 text-center">
             <div className="bg-clip-text bg-theme_red-light dark:bg-theme_red-dark">
@@ -27,7 +27,7 @@ export default function Sidebar() {
                             <Link href={"/tokens"}><div className="flex gap-2 items-center"><Coins size={22} /><span className="hidden sm:block">Tokens</span></div></Link>
                         </li>
                         <li className="hover:bg-theme_gray-dark rounded-lg px-4 py-2 whitespace-nowrap">
-                            <Link href={"/price-tracker"}><div className="flex gap-2 items-center"><ChartLine  size={22} /><span className="hidden sm:block">Price Tracker</span></div></Link>
+                            <Link href={"/price-tracker"}><div className="flex gap-2 items-center"><ChartLine size={22} /><span className="hidden sm:block">Price Tracker</span></div></Link>
                         </li>
                         <li className="hover:bg-theme_gray-dark rounded-lg px-4 py-2">
                             <Link href={"/transactions"}><div className="flex gap-2 items-center"><ArrowLeftRight size={22} /><span className="hidden sm:block">Transactions</span></div></Link>

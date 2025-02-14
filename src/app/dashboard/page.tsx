@@ -1,10 +1,7 @@
 import Container from '@/components/Container'
 import { Graph } from '@/components/Graph'
-import Header from '@/components/Header'
-import Loading from '@/components/Loading'
 import SmallCard from '@/components/SmallCard'
 import Image from 'next/image'
-import React, { Suspense } from 'react'
 
 function page() {
   return (

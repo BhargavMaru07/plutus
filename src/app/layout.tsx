@@ -9,8 +9,6 @@ import Footer from "@/components/Footer";
 import { APIDataProvider } from "@/hooks/UseApi";
 import { ClerkProvider } from "@clerk/nextjs";
 import Sidebar from "@/components/Sidebar";
-import useDarkMode from "@/hooks/useDarkMode";
-
 
 const ubuntu = Ubuntu({
   weight: ["400", "500", "700"],

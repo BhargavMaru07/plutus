@@ -3,12 +3,6 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadio
 import { Button } from './ui/button'
 import { RotateCcw } from 'lucide-react'
 
-interface Data {
-    duration: string,
-    maxProfit: number,
-    maxLoss: number,
-    totalAmount: number,
-}
 
 function Stratergy() {
     const [data, setData] = React.useState({
