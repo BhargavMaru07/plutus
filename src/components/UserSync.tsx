@@ -9,11 +9,11 @@ export default async function UserSync() {
 
   if (!user) return null; // ✅ Return null instead of empty JSX
 
-    // const token = await generateToken({
-    //   userId: user.id,
-    //   email: user.emailAddresses[0].emailAddress,
-    //   name: `${user.firstName ?? ""} ${user.lastName ?? ""}`.trim(),
-    // });
+    const token = await generateToken({
+      userId: user.id,
+      email: user.emailAddresses[0].emailAddress,
+      name: `${user.firstName ?? ""} ${user.lastName ?? ""}`.trim(),
+    });
 
   try {
     await createOrUpdateUser({

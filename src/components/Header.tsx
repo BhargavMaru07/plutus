@@ -7,6 +7,7 @@ import { Bell } from "lucide-react";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import Chatbot from "./ChatBot";
 
 function Header({ Title }: { Title: string }) {
   const router = useRouter();
@@ -17,6 +18,7 @@ function Header({ Title }: { Title: string }) {
       </div>
       <div className="absolute left-[25vw] top-0 h-[11vh] w-[52vw] bg-theme_black-light dark:bg-theme_black-dark">
         <div className="flex h-full w-full items-center justify-end gap-5 rounded-bl-2xl bg-white dark:bg-black">
+          <Chatbot/>
           <SignedOut>
             <SignInButton >
               <Button variant="outline">Login</Button>
